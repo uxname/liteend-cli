@@ -1,3 +1,4 @@
+#! /usr/bin/env node
 const {program} = require('commander');
 const {spawnSync} = require('child_process');
 const crypto = require('crypto');
