@@ -1,0 +1,18 @@
+{
+  "name": "liteend-cli",
+  "version": "1.0.0",
+  "description": "LiteEnd CLI tool",
+  "main": "index.js",
+  "bin": {
+    "liteend-cli": "./index.js"
+  },
+  "scripts": {
+    "start": "node index.js"
+  },
+  "keywords": [],
+  "author": "uxname",
+  "license": "MIT",
+  "dependencies": {
+    "commander": "^10.0.0"
+  }
+}
