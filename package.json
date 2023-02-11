@@ -1,6 +1,6 @@
 {
   "name": "liteend-cli",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "LiteEnd CLI tool",
   "main": "index.js",
   "bin": {
