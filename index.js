@@ -67,7 +67,7 @@ function writeNewKeys(projectRootDirectory) {
     }
 
     const env = objectToDotEnvString(envObj);
-    fs.writeFileSync(`${projectRootDirectory}/.env`, env);
+    fs.writeFileSync(`${projectRootDirectory}/.env`, env, 'utf8');
 }
 
 async function main(projectName, options) {
@@ -89,6 +89,7 @@ async function main(projectName, options) {
     if (options.gen) {
         colorPrint(Colors.blue, `Generating .env keys`);
         writeNewKeys(projectName);
+        spawnCommand(`cd ${projectName} && npm run db:gen`);
         colorPrint(Colors.blue, `Keys generated!`);
     }
 
