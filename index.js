@@ -40,8 +40,9 @@ function parseDotEnvFile(filepath) {
             || line === '') {
             continue;
         }
-        const [key, value] = line.split('=');
-        result[key] = value;
+        const separatorIndex = line.indexOf('=');
+        const key = line.substring(0, separatorIndex);
+        result[key] = line.substring(separatorIndex + 1);
     }
     return result;
 }
