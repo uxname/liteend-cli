@@ -98,6 +98,10 @@ async function main(projectName, options) {
         colorPrint(Colors.blue, `Setting git remote...`);
         spawnCommand(`cd ${projectName} && git remote set-url origin ${options.git}`);
         colorPrint(Colors.blue, `Git remote set to ${options.git}!`);
+    } else {
+        colorPrint(Colors.yellow, `Git remote not set!`);
+        spawnCommand(`cd ${projectName} && git remote remove origin`);
+        colorPrint(Colors.yellow, `Git remote removed!`);
     }
 
     colorPrint(Colors.green, `Project created!`);
