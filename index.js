@@ -76,12 +76,25 @@ async function main(projectName, options) {
         colorPrint(Colors.red, 'Project name is required!');
         return;
     }
+
+    if (!/^[a-zA-Z0-9-]+$/.test(projectName)) {
+        colorPrint(Colors.red, 'Project name should be lowercase and contain only letters, numbers and dashes!');
+        return;
+    }
+
     colorPrint(Colors.green, 'Welcome to LiteEnd CLI!');
 
     colorPrint(Colors.blue, `Creating project "${projectName}"`);
     colorPrint(Colors.blue, `Cloning repository...`);
     spawnCommand(`git clone https://github.com/uxname/liteend.git ${projectName}`);
     colorPrint(Colors.blue, `Repository cloned!`);
+
+    const appInfoJson = JSON.parse(fs.readFileSync(`${projectName}/app-info.json`, 'utf8'));
+    const packageJson = JSON.parse(fs.readFileSync(`${projectName}/package.json`, 'utf8'));
+    appInfoJson.name = projectName;
+    packageJson.name = projectName;
+    fs.writeFileSync(`${projectName}/app-info.json`, JSON.stringify(appInfoJson, undefined, 4), 'utf8');
+    fs.writeFileSync(`${projectName}/package.json`, JSON.stringify(packageJson, undefined, 4), 'utf8');
 
     colorPrint(Colors.blue, `Installing dependencies...`);
     spawnCommand(`cd ${projectName} && npm install --legacy-peer-deps`);
@@ -105,6 +118,7 @@ async function main(projectName, options) {
     }
 
     colorPrint(Colors.green, `Project created!`);
+    colorPrint(Colors.green, `Run "cd ${projectName} && npm run start:dev" to start the project!`);
 }
 
 program
@@ -115,4 +129,3 @@ program
     .action(main);
 
 program.parse();
-
